@@ -13,7 +13,7 @@
       <button @click="count -= 1">Decrement</button>
       <p x-text="count"></p>
     </div>
-    <!-- --------------------------------------- -->
+    <!-- -------------Example 1-------------------------- -->
     <h2>Toggle</h2>
     <div
       x-data="{show : false , 
@@ -23,13 +23,13 @@
       <button @click="toggle()" x-text="show ? 'Hide' : 'Show'"></button>
       <div x-show="show">Toggle Data</div>
     </div>
-    <!-- -------------------------------------- -->
+    <!-- -------------Example 2------------------------- -->
     <h2>Toggle with function</h2>
     <div x-data="myData()">
       <button @click="toggle()">Toggle Content</button>
       <div x-show="isOpen">Content...</div>
     </div>
-    <!-- -------------------------------------- -->
+    <!-- --------------Example 3------------------------ -->
     <h2>Toggle with reusable Data</h2>
     <div x-data="callable">
       <button @click="isToggle">Toggle Content</button>
@@ -50,6 +50,7 @@
         };
       }
       //reusable data
+      //alpine:init is an event that is fired when Alpine is initialized.
       document.addEventListener("alpine:init",()=>{
             Alpine.data("callable",()=>({
                 isVisible:false,

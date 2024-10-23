@@ -5,22 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="./assets/css/bootstrap.css" rel="stylesheet" />
     <script defer src="./assets/js/cdn.min.js"></script>
-    <title>text</title>
+    <title>ref</title>
   </head>
   <body>
     <div x-data>
       <!-- -------Example 1------------ -->
       <input type="text" x-ref="nameInput" placeholder="Type your name" />
-      <button @click="$refs.nameInput.focus()">Focus Input</button><br>
+      <button x-on:click="$refs.nameInput.focus()">Focus Input</button><br>
       <!-- -----------Example 2---------------- -->
-      <button @click="$refs.text.remove()">Remove Text</button>
+      <button x-on:click="$refs.text.remove()">Remove Text</button>
       <span x-ref="text">Hello 👋</span>
     </div>
 
-    <!-- -----------Example 3--------------- -->
+    <!-- -----------Example 3----------------->
+   
     <div x-data="{ items: [] }">
         <input type="text" x-ref="itemInput" placeholder="Add an item">
-        <button @click="items.push($refs.itemInput.value); $refs.itemInput.value = ''">Add Item</button>
+        <button x-on:click="items.push($refs.itemInput.value); $refs.itemInput.value = ''">Add Item</button>
 
         <ul>
             <template x-for="item in items" :key="item">

@@ -10,8 +10,8 @@
   <body class="p-3">
     <!-- ---------------------Example 1 simple checkbox------------------------ -->
 
-    <div x-data="{value : '' }">
-      <input type="checkbox" x-model="value" />
+    <div x-data="{value : 'off' ,text() { this.value = this.value == 'off' ? 'on' : 'off'} }">
+      <input type="checkbox" x-on:click="text()" />
       <span x-text="value"></span>
     </div>
     <!-- ----------------Example 2 with checkbox------------------ -->
