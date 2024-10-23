@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="./assets/js/cdn.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div x-data="dropdown">
+        <button @click="toggle">Toggle Content</button>    
+        <div x-show="open">
+            Content...
+        </div>
+    </div>
+     
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('dropdown', () => ({
+                open: false,
+     
+                toggle() {
+                    this.open = ! this.open
+                },
+            }))
+        })
+    </script>
+</body>
+</html>

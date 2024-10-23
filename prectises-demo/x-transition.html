@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>transition</title>
+    <script src="./assets/js/cdn.min.js"></script>
+</head>
+
+<body>
+    <div x-data="{ isLoginFormVisible: false }">
+        <button @click="isLoginFormVisible = !isLoginFormVisible">
+            Toggle Login Form
+        </button>
+        <!-- 
+        x-transition:enter.duration.1000ms
+        x-transition:leave.duration.500ms
+        x-transition:enter.scale.80
+        x-transition:leave.scale.90
+        -->
+        <div x-show="isLoginFormVisible"
+        x-transition:enter.duration.1000ms>
+            <h2>Login</h2>
+            <form>
+                <div>
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" required>
+                </div>
+                <div>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

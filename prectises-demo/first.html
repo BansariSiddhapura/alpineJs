@@ -1,0 +1,15 @@
+<html>
+<head>
+    <script defer src="./assets/js/cdn.min.js"></script>
+</head>
+<body>
+    <h1 x-data="{ message: 'I ❤️ Alpine' }" x-text="message"></h1>
+    <div x-data="{ open: false }">
+        <button @click="open = ! open">Toggle Content</button>
+     
+        <div x-show="open">
+            Content...
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./assets/css/bootstrap.css" rel="stylesheet" />
+    <script defer src="./assets/js/cdn.min.js"></script>
+    <title>bind</title>
+  </head>
+  <body>
+    <!----------------Example 1-------------------->
+    <div
+      x-data="{
+        placeholder : 'search..',    
+    }"
+    >
+      <input type="text" x-bind:placeholder="placeholder" :class="class" />
+    </div>
+    <br />
+    <!----------------Example 2 with shorthand syntax-------------------->
+    <div x-data="{isActive : true}">
+      <button
+        @click="isActive = ! isActive"
+        :class="isActive ? 'btn btn-success' : 'btn btn-danger' "
+        x-text="isActive ? 'disabled' : 'show'"
+      ></button>
+    </div>
+
+    <!----------------Example 3 with shorthand syntax bind attribute-------------------->
+    <div x-data="{ isDisabled: true }">
+      <input type="checkbox" @change="isDisabled = !isDisabled" />
+      <label>Enable button</label>
+
+      <button :disabled="isDisabled" class="mt-2">Click Me</button>
+    </div>
+    <!----------------Example 4 light dark theme-------------------->
+    <div x-data="{theme:true}">
+      <div class="container border p-5" :class="theme ? 'bg-light':'bg-dark'">
+        <button
+          @click="theme = !theme"
+          :class="theme ? 'btn btn-dark' : 'btn btn-light'"
+          x-text="theme ? 'dark' : 'light'"
+        ></button>
+      </div>
+    </div>
+    <script src="./assets/js/bootstrap.js"></script>
+  </body>
+</html>

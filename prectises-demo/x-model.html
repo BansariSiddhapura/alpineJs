@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./assets/css/bootstrap.css" rel="stylesheet" />
+    <script defer src="./assets/js/cdn.min.js"></script>
+    <title>model</title>
+  </head>
+  <body class="p-3">
+    <!-- ---------------------Example 1 simple checkbox------------------------ -->
+
+    <div x-data="{value : '' }">
+      <input type="checkbox" x-model="value" />
+      <span x-text="value"></span>
+    </div>
+    <!-- ----------------Example 2 with checkbox------------------ -->
+    <div x-data="{subject : []}" class="border p-3">
+      <input type="checkbox" value="php" x-model="subject" />PHP
+      <input type="checkbox" value="jquery" x-model="subject" />Jquery
+      <input type="checkbox" value="html" x-model="subject" />HTML<br />
+      Subjects are : <span x-text="subject"></span>
+    </div>
+    <!-- ----------------Example 3 with checkbox------------------ -->
+    <div x-data="{places : ''}" class="border p-3 mt-3">
+      <select x-model="places">
+        <option value="" disabled>select place</option>
+        <option value="kashmir">Kashmir</option>
+        <option value="jaipur">Jaipur</option>
+        <option value="goa">Goa</option></select
+      ><br />
+      selected place: <span x-text="places"></span>
+    </div>
+    <!-- ----------------Example 4------------------ -->
+
+    <div x-data="{ userInput: '' }">
+      <h1>Dynamic HTML Renderer</h1>
+
+      <textarea
+        x-model="userInput"
+        rows="5"
+        cols="50"
+        placeholder="Enter your HTML here..."
+      ></textarea>
+
+      <div class="mt-2">
+        <h2>Output:</h2>
+        <div x-html="userInput" class="border p-2"></div>
+      </div>
+    </div>
+    <!-- ----------------Example 5 change color---------------- -->
+
+    <div x-data="{color : ''}" class="border p-3 mt-3">
+      <div class="h-25 w-25 border" :class="'bg-' + color" x-text="color"></div>
+      <select x-model="color">
+        <option value="" disabled>select color</option>
+        <option value="primary">primary</option>
+        <option value="success">success</option>
+        <option value="info">info</option>
+        <option value="danger">danger</option>
+      </select>
+    </div>
+
+    <script src="./assets/js/bootstrap.js"></script>
+  </body>
+</html>

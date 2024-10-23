@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./assets/css/bootstrap.css" rel="stylesheet" />
+    <script defer src="./assets/js/cdn.min.js"></script>
+    <title>modelable</title>
+  </head>
+  <body>
+    <!-- -----------Example 1--------------- -->
+    <div id="parent-component" x-data="{text: ''}" class="container border p-2 m-2">
+      <div
+        id="child-component"
+        x-data="{message: ''}"
+        x-model="message"
+        x-modelable="text"
+      >
+        <input type="text" x-model="message" />
+      </div>
+      <div>Text: <span x-text="text"></span></div>
+    </div>
+
+    <!-- -----------Example 2-------------- -->
+    <div x-data="{ number: 5 }" class="container border p-2 m-2">
+        <div x-data="{ count: 0 }" x-modelable="number" x-model="count">
+            <button @click="count++">Increment</button>
+        </div>
+     
+        Number: <span x-text="number"></span>
+    </div>
+    <script src="./assets/js/bootstrap.js"></script>
+  </body>
+</html>

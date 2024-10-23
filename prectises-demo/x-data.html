@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script defer src="./assets/js/cdn.min.js"></script>
+    <title>data</title>
+  </head>
+  <body>
+    <h1>1.Increment / Decrement</h1>
+    <div x-data="{count : 1}">
+      <button x-on:click="count += 1">Increment</button>
+      <button @click="count -= 1">Decrement</button>
+      <p x-text="count"></p>
+    </div>
+    <!-- --------------------------------------- -->
+    <h2>Toggle</h2>
+    <div
+      x-data="{show : false , 
+            toggle() {this.show = !this.show}
+        }"
+    >
+      <button @click="toggle()" x-text="show ? 'Hide' : 'Show'"></button>
+      <div x-show="show">Toggle Data</div>
+    </div>
+    <!-- -------------------------------------- -->
+    <h2>Toggle with function</h2>
+    <div x-data="myData()">
+      <button @click="toggle()">Toggle Content</button>
+      <div x-show="isOpen">Content...</div>
+    </div>
+    <!-- -------------------------------------- -->
+    <h2>Toggle with reusable Data</h2>
+    <div x-data="callable">
+      <button @click="isToggle">Toggle Content</button>
+      <div x-show="isVisible">Content...</div>
+    </div>
+
+    <script>
+      //function
+      function myData() {
+        return {
+          open: false,
+          isOpen() {
+            return this.open;
+          },
+          toggle() {
+            this.open = !this.open;
+          },
+        };
+      }
+      //reusable data
+      document.addEventListener("alpine:init",()=>{
+            Alpine.data("callable",()=>({
+                isVisible:false,
+                isToggle(){
+                    this.isVisible = ! this.isVisible
+                }
+
+            }))
+      })
+    </script>
+  </body>
+</html>

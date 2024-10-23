@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./assets/css/bootstrap.css" rel="stylesheet" />
+    <script defer src="./assets/js/cdn.min.js"></script>
+    <title>text</title>
+  </head>
+  <body>
+    <div
+      x-data="{
+        name :'ram',
+        city :'ayodhya'
+    }"
+    >
+      <label>name is <span x-text="name"></span></label><br />
+      <label>city is <span x-text="city"></span></label>
+    </div>
+    <script src="./assets/js/bootstrap.js"></script>
+  </body>
+</html>

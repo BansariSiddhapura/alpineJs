@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script defer src="./assets/js/cdn.min.js"></script>
+    <title>show</title>
+  </head>
+  <body>
+    <!----------------Example 1------------------ -->
+    <div x-data="{isCheckDisplay : false}">
+      <label for="">
+        <input type="checkbox" @change="isCheckDisplay = !isCheckDisplay" />Show
+        Additional Options</label
+      >
+
+      <div x-show="isCheckDisplay">
+        <label><input type="checkbox" />PHP</label>
+        <label><input type="checkbox" />Jquery</label>
+        <label><input type="checkbox" />Javascript</label>
+      </div>
+    </div>
+    <!----------------Example 2------------------ -->
+    <div
+      x-data="{show : false , 
+                    toggle() {this.show = !this.show}
+              }"
+    >
+      <button @click="toggle()" x-text="show ? 'Hide' : 'Show'"></button>
+      <div x-show="show">Toggle Data</div>
+    </div>
+  </body>
+</html>

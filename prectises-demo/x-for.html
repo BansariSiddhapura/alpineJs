@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script defer src="./assets/js/cdn.min.js"></script>
+    <title>for</title>
+  </head>
+  <body>
+   <!-- --------------------Example 1--------------------------- -->
+    <div
+      x-data="{person:[
+                {id:1,name:'john'},
+                {id:2,name:'doe'}
+              ]}" >
+      <template x-for="p in person">
+        <p x-text="p.name"></p>
+      </template>
+    </div>
+ <!------------------------Example 2-------------------------->
+    <div x-data="{ items: ['Apple', 'Banana', 'Cherry'] }">
+      <h1>Fruit List</h1>
+      <ul>
+          <template x-for="(item,index) in items" >
+              <li>
+                  <span x-text="index"></span>
+                  <span x-text="item"></span>
+              </li>
+          </template>
+          
+      </ul>
+      
+      <template x-for="fruit in items">
+          <p>
+              <span>The next fruit is </span><span x-text="fruit">
+          </p>
+      </template>
+
+      <ul>
+        <template x-for="i in 10">
+            <li x-text="i"></li>
+        </template>
+    </ul>
+  </div>
+ 
+  </body>
+</html>
