@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpine.js FAQ Accordion</title>
+    <script src="../assets/js/cdn.min.js" defer></script>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .question { cursor: pointer; padding: 10px; background: #f1f1f1; border: 1px solid #ddd; margin: 5px 0; }
+        .answer { padding: 10px; border: 1px solid #ddd; border-top: none; }
+        .active { background: #e2e2e2; }
+    </style>
+</head>
+<body x-data="faqAccordion()">
+
+    <h1>Frequently Asked Questions</h1>
+    
+    <div x-for="(faq, index) in faqs" :key="index">
+        <div 
+            class="question" 
+            :class="{ 'active': selectedIndex === index }"
+            @click="toggle(index)"
+        >
+            <span x-text="faq.question"></span>
+        </div>
+        <div x-if="selectedIndex === index" class="answer" x-html="faq.answer"></div>
+    </div>
+
+    <script>
+        function faqAccordion() {
+            return {
+                selectedIndex: null,
+                faqs: [
+                    { question: "What is Alpine.js?", answer: "Alpine.js is a minimal framework for composing JavaScript behavior in your HTML." },
+                    { question: "How do I install Alpine.js?", answer: "You can include Alpine.js by adding a script tag to your HTML file: <code>&lt;script src='https://cdn.jsdelivr.net/npm/alpinejs' defer&gt;&lt;/script&gt;</code>" },
+                    { question: "What is the purpose of x-data?", answer: "The x-data directive is used to define a component's state." },
+                    { question: "Can I use Alpine.js with other frameworks?", answer: "Yes, Alpine.js can be used alongside frameworks like Vue.js and React." }
+                ],
+                toggle(index) {
+                    this.selectedIndex = this.selectedIndex === index ? null : index;
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>

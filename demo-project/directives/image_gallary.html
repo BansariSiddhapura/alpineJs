@@ -1,0 +1,115 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../assets/css/bootstrap.css" rel="stylesheet">
+    <script defer src="../assets/js/cdn.min.js"></script>
+    <title>image gallary</title>
+</head>
+<style>
+    body { font-family: Arial, sans-serif; }
+    .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+    .gallery img { width: 100%; cursor: pointer; border: 2px solid transparent; transition: border 0.3s; }
+    .gallery img.selected { border: 2px solid blue; }
+    .modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.8); justify-content: center; align-items: center; }
+    .modal.active { display: flex; }
+    .close { position: absolute; top: 20px; right: 20px; color: white; cursor: pointer; }
+</style>
+<body>
+    <div x-data="showPhotoes()" class="container">
+        <h2>image gallary</h2>
+        <div class="row d-flex">
+            <template x-for="i in images" :key="index">
+                <img :src="i.src" class="col col-3" :alt="no img" >
+            </template>
+        </div>
+        <div></div>
+
+    </div>
+    <script src="./assets/js/bootstrap.js"></script>
+    <script>
+        function showPhotoes() {
+            return {
+                images: [
+                    { src: '../images/img1.jpeg' },
+                    { src: '../images/img2.jpeg' },
+                    { src: '../images/img3.jpeg' },
+                    { src: '../images/img4.jpeg' },
+                ],
+                selectedImg : '',
+            }
+        }
+    </script>
+    <script src="../assets/js/bootstrap.js"></script>
+</body>
+
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Image Gallery</title>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs" defer></script>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+        .gallery img { width: 100%; cursor: pointer; border: 2px solid transparent; transition: border 0.3s; }
+        .gallery img.selected { border: 2px solid blue; }
+        .modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.8); justify-content: center; align-items: center; }
+        .modal.active { display: flex; }
+        .close { position: absolute; top: 20px; right: 20px; color: white; cursor: pointer; }
+    </style>
+</head>
+<body x-data="imageGallery()">
+
+    <h1>Simple Image Gallery</h1>
+    
+    <div class="gallery">
+        <template x-for="(image, index) in images" :key="index">
+            <div>
+                <img :src="image.src" @click="selectImage(image)" :class="{ 'selected': selectedImage === image }">
+                <button @click="removeImage(index)">Remove</button>
+            </div>
+        </template>
+    </div>
+
+    <div class="modal" :class="{ 'active': isModalOpen }">
+        <span class="close" @click="closeModal()">×</span>
+        <img x-ref="largeImage" :src="selectedImage?.src" alt="Selected image">
+        <p x-text="selectedImage?.alt"></p>
+    </div>
+
+    <script>
+        function imageGallery() {
+            return {
+                images: [
+                    { src: '../images/img1.jpeg' },
+                    { src: '../images/img2.jpeg' },
+                    { src: '../images/img3.jpeg' },
+                    { src: '../images/img4.jpeg' },
+                ],
+                selectedImage: null,
+                isModalOpen: false,
+                selectImage(image) {
+                    this.selectedImage = image;
+                    this.isModalOpen = true;
+                },
+                closeModal() {
+                    this.isModalOpen = false;
+                },
+                removeImage(index) {
+                    this.images.splice(index, 1);
+                    if (this.selectedImage && this.selectedImage.src === this.images[index]?.src) {
+                        this.selectedImage = null; // Deselect if removed
+                        this.isModalOpen = false; // Close modal if the selected image is removed
+                    }
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>

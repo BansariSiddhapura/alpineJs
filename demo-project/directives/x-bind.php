@@ -12,7 +12,7 @@
     <div x-data="{isActive : true}">
       <button
         @click="isActive = ! isActive"
-        :class="isActive ? 'btn btn-success' : 'btn btn-danger' "
+        :class="isActive ? 'btn btn-success btn-sm' : 'btn btn-danger btn-sm' "
         x-text="isActive ? 'disabled' : 'show'"
       ></button>
     </div>
@@ -23,7 +23,7 @@
       <input type="checkbox" @change="isDisabled = !isDisabled" />
       <label>Enable button</label>
 
-      <button :disabled="isDisabled" class="mt-2">Click Me</button>
+      <button :disabled="isDisabled" class="mt-2 btn btn-success">Click Me</button>
     </div>
     </div>
     <!----------------Example 4 light dark theme-------------------->

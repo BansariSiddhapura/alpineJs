@@ -12,50 +12,36 @@
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid" x-data="{theme : true}" :class="theme ? 'bg-light text-dark' : 'bg-dark text-light'">
         <div class="row">
-            <div class="col col-12 bg-light text-light d-flex justify-content-start align-items-center p-3">
+            <div class="col col-12 d-flex justify-content-between align-items-center p-3">
                 <img src="https://alpinejs.dev/alpine_long.svg" alt="" height="30px">
-                <span class="fs-3">Alpine Demo</span>
+                <button x-on:click="theme = !theme" x-text="theme ? 'dark' : 'light'"
+                    :class="theme ? 'btn btn-dark' : 'btn btn-light'"></button>
             </div>
-
         </div>
 
         <div class="row">
-            <div class="col col-2 bg-light py-4 text-dark">
-                <span class="fs-4 fw-bold">Directives</span>
-                <ul class="list-group gap-1 list-unstyled d-flex justify-content-center">
-                    <li><a href="index.php?id=1" class="btn btn-link text-decoration-none text-black">x-data</a></li>
-                    <li><a href="" class="btn btn-link text-decoration-none text-black">x-init</a></li>
-                    <li><a href="" class="btn btn-link text-decoration-none text-black">x-show</a></li>
-                    <li><a href="" class="btn btn-link text-decoration-none text-black">x-bind</a></li>
-                    <li><a href="" class="btn btn-link text-decoration-none text-black">x-on</a></li>
-                    <li><a href="" class="btn btn-link text-decoration-none text-black">x-text</a></li>
-                    <li><a href="" class="btn btn-link text-decoration-none text-black">x-html</a></li>
-                    <li><a href="" class="btn btn-link text-decoration-none text-black">x-model</a></li>
-                    <li><a href="" class="btn btn-link text-decoration-none text-black">x-modelable</a></li>
-                    <li><a href="" class="btn btn-link text-decoration-none text-black">x-for</a></li>
-                    <li><a href="" class="btn btn-link text-decoration-none text-black">x-transition</a></li>
-                    <li><a href="" class="btn btn-link text-decoration-none text-black">x-effect</a></li>
-                    <li><a href="" class="btn btn-link text-decoration-none text-black">x-ignore</a></li>
-                    <li><a href="" class="btn btn-link text-decoration-none text-black">x-ref</a></li>
-                    <li><a href="" class="btn btn-link text-decoration-none text-black">x-cloak</a></li>
-                    <li><a href="" class="btn btn-link text-decoration-none text-black">x-teleport</a></li>
-                    <li><a href="" class="btn btn-link text-decoration-none text-black">x-if</a></li>
-                    <li><a href="" class="btn btn-link text-decoration-none text-black">x-id</a></li>
-                </ul>
+            <div class="col col-2 py-4">
+                <?php require_once "sideLinks.php" ?>
             </div>
-            <div class="col col-9 my-4" id="myAllData">
-            <?php
-                $id=$_GET['id'];
-                switch($id):
-                    case '1':
-                        require_once "./directives/x-data.html";
-                        break;
-                    default:
-                        echo "no files";
-                endswitch
-            ?>
+            <div class="col col-9 my-4 mx-3" id="myAllData">
+                <?php
+                if (!empty($_GET['id'])) {
+                    $id = $_GET['id'];
+                    $files = [
+                        'p1' => './directives/calculator.php',
+                        'p2' => './directives/attendence.php',
+                        '1' => './directives/x-data.php',
+                        '2' => './directives/x-init.php',
+                        '3' => './directives/x-bind.php'
+                    ];
+
+                    if (array_key_exists($id, $files)) {
+                        require_once $files[$id];
+                    }
+                }
+                ?>
             </div>
         </div>
     </div>
