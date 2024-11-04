@@ -13,24 +13,19 @@
 </head>
 
 <body>
-    <nav class="navbar bg-body-tertiary">
-        <div class="container-fluid d-flex justify-content-between">
-            <div>
-                <span class="navbar-brand mb-0 h1">Students Data</span>
-            </div>
-            <div class="d-flex gap-4">
-                <span>login</span>
-                <span>home</span>
-            </div>
+    <nav class="navbar bg-dark bg-gradient">
+        <div class="container-fluid d-flex justify-content-center">
+            <span class="navbar-brand mb-0 h1 text-light">Students Data</span>
         </div>
     </nav>
 
-    <div class="container w-50 my-5" x-data="storageData()">
-    <div class="d-flex justify-content-start my-3">
-                <button x-on:click="showRecords()" class="btn btn-info">Show Table</button>
-            </div>
-        <div class="card border shadow-sm rounded-2">
-            <div class="p-3 bg-dark m-0 text-light fs-3 text-center rounded-2">
+    <div class="container w-50 my-5" x-data="storageData()" x-cloak>
+        <div class="d-flex justify-content-end my-3">
+            
+            <button x-on:click="showItems()" class="btn bg-info bg-gradient bg-opacity-50 text-info-emphasis" x-text="tableShow ? 'add record' : 'show table'"></button>
+        </div>
+        <div class="card border shadow-sm rounded-2 my-3" x-show="formShow">
+            <div class="p-2 bg-info bg-gradient bg-opacity-25 m-0 text-dark fs-3 fw-medium text-center rounded-2">
                 <span>Student Form</span>
             </div>
             <form x-on:submit.prevent="saveData()" class="p-4" x-ref="reset">
@@ -48,11 +43,18 @@
                     <input type="password" name="password" id="password" class="form-control" placeholder="Enter password" x-model="password">
                 </div>
                 <div class="mb-3">
-                    <label for="city" class="form-label">Address</label>
-                    <textarea name="address" id="address" class="form-control" x-model="address"></textarea>
+                    <label for="address" class="form-label">Select City</label>
+                    <!-- <textarea name="address" id="address" class="form-control" x-model="address"></textarea> -->
+                    <select name="" class="form-control" x-model="address">
+                        <option value="" selected>Select City</option>
+                        <option value="rajkot">Rajkot</option>
+                        <option value="amadavad">Amadavad</option>
+                        <option value="gondal">Gondal</option>
+                        <option value="vadodra">Vadodra</option>
+                    </select>
                 </div>
                 <div class="mb-3 d-flex gap-3">
-                    <label for="" class="form-label">Gender</label>
+                    <label class="form-label">Gender</label>
                     <div class="form-check">
                         <label>Male</label>
                         <input type="radio" name="gender" class="form-check-input" x-model="gender" value="male">
@@ -63,14 +65,29 @@
                     </div>
                 </div>
                 <div class="mb-3 d-flex justify-content-end">
-                    <button type="submit" x-on:click="$refs.reset.reset()" class="btn btn-outline-primary" name="save_student" id="save_students">Save</button>
+                    <button type="submit" x-on:click="$refs.reset.reset()" class="btn bg-success-subtle" name="save_student" id="save_students">Save</button>
                 </div>
             </form>
         </div>
         <!-- table -->
-        <div class="m-5" x-show="tableShow">
-           
-            <table class="table table-striped">
+        <div x-show="tableShow">
+            <div class="d-flex gap-2 my-3">
+                <input type="search" class="form-control" placeholder="search for students.." x-model="search_data">
+                <button x-on:click="searchData()" class="btn bg-info bg-gradient bg-opacity-50">Search</button>
+                <select name="" class="form-control" x-model="selectedGender" x-on:change="searchData">
+                    <option value="" selected>Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+                <select name="" class="form-control" x-model="selectedCity" x-on:change="searchData">
+                    <option value="" selected>Select City</option>
+                    <option value="rajkot">Rajkot</option>
+                    <option value="amadavad">Amadavad</option>
+                    <option value="gondal">Gondal</option>
+                    <option value="vadodra">Vadodra</option>
+                </select>
+            </div>
+            <table class="table table-striped table-secondary">
                 <thead>
                     <th>Id</th>
                     <th>Name</th>
@@ -88,8 +105,8 @@
                             <td x-text="table.address"></td>
                             <td x-text="table.gender"></td>
                             <td>
-                                <button x-on:click="deleteRecord($el.id)" :id="table.id" class="btn btn-sm btn-outline-danger">Delete</button>
-                                <button x-on:click="editRecord($el.id)" :id="table.id" class="btn btn-sm btn-outline-warning">Edit</button>
+                                <button x-on:click="deleteRecord($el.id)" :id="table.id" class="btn btn-sm bg-danger-subtle">Delete</button>
+                                <button x-on:click="editRecord($el.id)" :id="table.id" class="btn btn-sm bg-warning-subtle">Edit</button>
                             </td>
                         </tr>
                     </template>
@@ -103,7 +120,8 @@
         function storageData() {
 
             return {
-                tableShow:false,
+                tableShow: false,
+                formShow: true,
                 id: '',
                 name: '',
                 email: '',
@@ -111,7 +129,27 @@
                 address: '',
                 gender: '',
                 tableData: {},
+                search_data: '',
+                selectedGender: '',
+                selectedCity: '',
 
+                showItems() {
+                    this.tableShow = !this.tableShow
+                    this.formShow = !this.formShow
+
+                    fetch("action.php", {
+                            "method": "post",
+                            "header": {
+                                "Content-Type": "application/json; charset=utf"
+                            },
+                            "body": JSON.stringify({
+                                action: 'show',
+                            })
+                        }).then(res => res.json())
+                        .then(res => this.tableData = res)
+
+
+                },
                 saveData() {
                     studentsDetails = {
                         'id': this.id,
@@ -122,9 +160,6 @@
                         'gender': this.gender
                     }
                     //console.log(studentsDetails);
-
-                    //this.myData.push(studentsDetails);
-                    // console.log(this.myData)
                     fetch("action.php", {
                             "method": "post",
                             "header": {
@@ -135,7 +170,10 @@
                                 action: 'insert'
                             }) //convert a studentDetails object into string
                         }).then(res => res.json())
-                        .then(res => alert(res.message));
+                        .then(res => alert(res.message))
+                        .then(res => location.reload())
+
+
                 },
 
                 deleteRecord(id) {
@@ -150,11 +188,13 @@
                                 id: id
                             })
                         }).then(res => res.json())
-                        .then(res => alert(res.message));
+                        .then(res => alert(res.message))
+                        .then(res => location.reload())
                 },
-                showRecords() {
-                    tableShow = !tableShow
-                    //console.log(id);
+                searchData() {
+                    search = this.search_data ? this.search_data : ''
+                    selectGender = this.selectedGender ? this.selectedGender : ''
+                    selectCity = this.selectedCity ? this.selectedCity : ''
                     fetch("action.php", {
                             "method": "post",
                             "header": {
@@ -162,12 +202,16 @@
                             },
                             "body": JSON.stringify({
                                 action: 'show',
+                                search: search,
+                                selectGender: selectGender,
+                                selectCity: selectCity
                             })
                         }).then(res => res.json())
                         .then(res => this.tableData = res)
 
                 },
                 editRecord(id) {
+                    this.formShow = !this.formShow
                     fetch("action.php", {
                             "method": "post",
                             "header": {
@@ -179,7 +223,7 @@
                             })
                         }).then(res => res.json())
                         .then(res => {
-                            this.id = res[0].id,
+                                this.id = res[0].id,
                                 this.name = res[0].name,
                                 this.email = res[0].email,
                                 this.password = res[0].password,
