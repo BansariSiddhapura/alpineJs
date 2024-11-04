@@ -15,7 +15,7 @@
             toggle() {this.show = !this.show}
         }">
     <button @click="toggle()" x-text="show ? 'Hide' : 'Show'" class="btn btn-primary btn-sm"></button>
-    <div x-show="show" x-transition:enter.duration.1000ms>Toggle Data</div>
+    <div x-show="show" x-transition:enter.duration.1000ms x-transition:leave.duration.2000ms>Toggle Data</div>
   </div>
   <!-----------x-if for compare with x-show--->
   <!-- <div x-data="{show : false , 
@@ -31,7 +31,7 @@
 <div class="container border p-3 my-2">
   <h4>Exercise 3 : Toggle with function</h4>
   <div x-data="myData()">
-    <button @click="toggle()" class="btn btn-primary btn-sm">Toggle Content</button>
+    <button @click="toggle" class="btn btn-primary btn-sm">Toggle Content</button>
     <div x-show="isOpen">Content...</div>
   </div>
 </div>
@@ -68,6 +68,7 @@
       },
     };
   }
+
   //reusable data
   //alpine:init is an event that is fired when Alpine is initialized.
   document.addEventListener("alpine:init", () => {

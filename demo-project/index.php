@@ -17,7 +17,7 @@
 </style>
 
 <body x-data x-cloak>
-    <div class="container-fluid" x-data="{theme : true}" :class="theme ? 'bg-light text-dark' : 'bg-dark text-light'">
+    <div class="container-fluid vh-100" x-data="{theme : true}" :class="theme ? 'bg-light text-dark' : 'bg-dark text-light'">
         <div class="row">
             <div class="col col-12 d-flex justify-content-between align-items-center p-3">
                 <img src="https://alpinejs.dev/alpine_long.svg" alt="" height="30px">
@@ -44,8 +44,8 @@
                         '5' => './directives/x-model.php',
                         '6' => './directives/x-for.php',
                         '7' => './directives/x-effect.php',
-                        '8'=>'./directives/x-teleport.php',
-                        '9'=>'./directives/x-if.php'
+                        '8' => './directives/x-teleport.php',
+                        '9' => './directives/x-if.php'
                     ];
 
                     if (array_key_exists($id, $files)) {

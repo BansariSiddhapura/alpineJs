@@ -6,8 +6,8 @@
 
         <div class="d-flex gap-2">
             <input type="date" class="form-control" x-on:change="clear()" x-model="date">
-            <button class="btn btn-success w-75" x-on:click="allDisplay = !allDisplay">Show All Data</button>
-        </div>
+            <button class="btn btn-success w-75" x-on:click="allDisplay = !allDisplay">Show all Data</button>
+        </div> 
     </div>
     <table class="table table-bordered table-striped" :class="theme ? '' : 'table-dark'">
         <thead>
@@ -132,31 +132,29 @@
                         this.absent.push(status.name)
                     }
                 });
-
             },
 
             showAll() {
                 if (this.date) {
-                    //this.result = !this.result
+                  
                     students = {
                         'date': this.date,
                         'present': this.present,
                         'absent': this.absent
                     }
                     this.allDetailsStore.push(students)
-                    console.log(this.allDetailsStore);
-                    this.clear()
-                }else{
-                   
+                    //console.log(this.allDetailsStore);
+                    
                 }
-
-
+                this.clear()
             },
 
             clear() {
                 this.students.forEach(status => {
                     status.check = false;
                 })
+              
+                
               
                
             }

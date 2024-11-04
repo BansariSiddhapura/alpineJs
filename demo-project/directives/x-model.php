@@ -1,23 +1,21 @@
 <!-----------------------Example 1 simple checkbox-------------------------->
-
-<div x-data="{value : 'off' ,text() { this.value = this.value == 'off' ? 'on' : 'off'} }" class="container border p-3 my-2">
+<div x-data="show()" class="container border p-3 my-2">
   <h4>Exercise 1 : if checked then display on otherwise off</h4>
   <input type="checkbox" x-on:click="text()" class="form-check-input"/>
   <span x-text="value"></span>
 </div>
-
 <!------------------Example 2 with checkbox-------------------->
 <div x-data="{subject : []}" class="border p-3 my-3">
 <h4>Exercise 2 : only checked value display</h4>
-  <input type="checkbox" value="php" x-model="subject" class="form-check-input me-2"/>PHP
-  <input type="checkbox" value="jquery" x-model="subject" class="form-check-input me-2"/>Jquery
-  <input type="checkbox" value="html" x-model="subject" class="form-check-input me-2"/>HTML<br />
+  <input type="checkbox" name="PHP1" value="php" x-model="subject" class="form-check-input me-2"/>PHP
+  <input type="checkbox" name="PHP2" value="jquery" x-model="subject" class="form-check-input me-2"/>Jquery
+  <input type="checkbox" name="PHP3" value="html" x-model="subject" class="form-check-input me-2"/>HTML<br />
   Subjects are : <span x-text="subject"></span>
 </div>
 <!-----------------Example 3 with checkbox-------------------->
 <div x-data="{places : ''}" class="border p-3 my-3">
 <h4>Exercise 3 : only selected item display</h4>
-  <select x-model="places" class="form-control">
+  <select x-model="places" class="form-control" multiple>
     <option value="" disabled>select place</option>
     <option value="kashmir">Kashmir</option>
     <option value="jaipur">Jaipur</option>
@@ -25,6 +23,14 @@
   </select><br />
   selected place: <span x-text="places"></span>
 </div>
+<div x-data="{places : ''}" class="border p-3 my-3">
+<h4>Exercise 3 : only selected item display</h4>
+  <input type="radio" value="male" name="gender">Male
+  <input type="radio" value="female" name="gender">Female
+  <input type="radio" value="other" name="gender">other
+  selected place: <span x-text="places"></span>
+</div>
+
 
 <!------------------Example 4 change color------------------>
 
@@ -39,3 +45,13 @@
     <option value="danger">danger</option>
   </select>
 </div>
+<script>
+  function show(){
+    return{
+      value : 'off' ,
+      text() { 
+        this.value = this.value == 'off' ? 'on' : 'off'
+      }
+    }
+  }
+</script>
